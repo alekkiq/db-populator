@@ -3,7 +3,7 @@ import os
 
 def config() -> dict:
     # Load configs from .env file
-    load_dotenv(os.abspath(os.path.join(os.path.dirname(__file__), ".env")))
+    load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
     return {
         "connection_params": {
@@ -14,8 +14,8 @@ def config() -> dict:
             "collation": "utf8mb4_unicode_ci",
             "autocommit": False,
         },
-        "chuksize": 500, # The number of rows inserted simultaneously in the DB
-        "data_format": "csv", # "csv" | "json" | "xml"
+        "chunksize": 500, # The number of rows inserted simultaneously in the DB
+        "data_format": "json", # "csv" | "json" | "xml"
         "databases": {
             # Your databases & tables go here!
         }
