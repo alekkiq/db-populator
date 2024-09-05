@@ -141,4 +141,3 @@ Since the script supports CSV, JSON and XML data formats, there are some "guidel
 
 ## TO-DOS
 - Add support for table relationships.
-- Check if database exists already - for example creating multiple tables for same db. Currently it drops it each time
