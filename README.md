@@ -1,4 +1,4 @@
-# Python database populator from CSV
+# Python MariaDB database populator from CSV
 
 ## Table of Contents
 1. [About](#about)
