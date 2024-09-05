@@ -5,7 +5,7 @@
 2. [Features](#features)
 3. [System requirements](#requirements)
 4. [Getting started](#getting-started)
-5. [TO-DOS](#todos)
+5. [TO-DOS](#to-dos)
 
 ## About
 A quite simple database populator built with Python. Works with **MariaDB** databases.
