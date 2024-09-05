@@ -22,8 +22,7 @@ def create_database(cursor: mysql.connector.cursor.MySQLCursor, database_name: s
     print(f"Creating database '{database_name}'...")
     
     try:
-        cursor.execute(f"DROP DATABASE IF EXISTS {database_name};"),
-        cursor.execute(f"CREATE DATABASE {database_name};"),
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {database_name};"),
         cursor.execute(f"ALTER DATABASE {database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"), # very important!
         cursor.execute(f"USE {database_name};")
         
@@ -37,7 +36,7 @@ def create_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str
     '''
     print(f"Creating table '{table_name}'...")
     
-    create_table_statement = f"CREATE TABLE {table_name} (\n"
+    create_table_statement = f"CREATE TABLE IF NOT EXISTS {table_name} (\n"
     
     for column in column_names:
         column_definition = f"{column} {column_data_types.get(column, 'VARCHAR(255)')},\n"
