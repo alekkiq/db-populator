@@ -18,5 +18,20 @@ def config() -> dict:
         "data_format": "json", # "csv" | "json" | "xml"
         "databases": {
             # Your databases & tables go here!
+            "countries": {
+                "tables": {
+                    "country": {
+                        "data_file": "countries.json",
+                        "data_types": {
+                            "id": "INT PRIMARY KEY",
+                            "code": "VARCHAR(2)",
+                            "name": "VARCHAR(255)",
+                            "continent": "VARCHAR(2)",
+                            "wikipedia_link": "VARCHAR(255)",
+                            "keywords": "VARCHAR(255)"
+                        }
+                    }
+                }
+            }
         }
     }
