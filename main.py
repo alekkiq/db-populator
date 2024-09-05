@@ -9,6 +9,12 @@ if __name__ == "__main__":
         print(f"Configs loaded:\n{configs}\n\n")
         for db_name, database in configs["databases"].items():
             for table_name, table in database["tables"].items():
-                populate_database(db_name, table["data_file"], table["data_types"], table_name)
+                populate_database(
+                    db_name = db_name, 
+                    data_file = table["data_file"], 
+                    file_type = configs["data_format"],
+                    data_types = table["data_types"], 
+                    table_name = table_name
+                )
     except Exception as error:
         print(f"An error occurred while trying to populate the database.\nError:\n{error}")
