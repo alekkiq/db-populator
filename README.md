@@ -11,6 +11,8 @@
 ## About
 A quite simple database populator built with Python. Works with **MariaDB** databases.
 
+***IMPORTANT***: This script is ***NOT*** suited for production use, as it is ***NOT*** designed to have a safe way of storing database credidentials! DO NOT USE IT IN PRODUCTION APP!
+
 ## Features
 - Supports bulk data insertion from the 3 main data file formats.
 - Capable of creating & populating multiple databases on one execution.
@@ -33,14 +35,18 @@ And the following external Python packages:
 ## Getting started
 
 1. Copy the entire repository into your local instance.
-2. Run this command to download the needed packages:
+2. Run the setup script in your favorite command line interface from the root of the project with:
+
+    ```bash
+    ./setup.sh
+    ```
+3. Run this command to download the needed python packages:
 
     ```bash
     pip install mysql-connector-python pandas xmltodict
     ```
-3. Put your ready data file(s) in the ```data/``` directory. Each file should represent a *single* MySQL table.
-4. Setup your configurations:
-    - Create an ```.env``` file in the project root based on ```.env.example``` and add your proper database connection values.
+4. Put your ready data file(s) in the ```data/``` directory. Each file should represent a *single* MySQL table. See [data format examples](#data-examples) for the programs "norm" of each data format.
+5. Define the databases-part of your configurations:
     - Add your database(s) and table(s) to the ```config.py``` file like so:
     
         ```python
@@ -71,7 +77,7 @@ And the following external Python packages:
         ```
 
         **FYI**: the program runs through each database in ```"databases"``` and creates that database. It then loops through the ```"tables"``` and creates the tables under the database and finally populates that table with the data in ```"data_file"```
-5. Run the ```main.py``` file and the database(s) should be set to go!
+6. Run the ```main.py``` file and the database(s) should be set to go!
 
 ## Data examples
 
@@ -134,6 +140,5 @@ Since the script supports CSV, JSON and XML data formats, there are some "guidel
     ```
 
 ## TO-DOS
-- A shell script that would automatically create ```config.py``` with user input values. Removes the need for an .env file
 - Add support for table relationships.
 - Check if database exists already - for example creating multiple tables for same db. Currently it drops it each time
