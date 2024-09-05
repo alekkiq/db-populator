@@ -1,4 +1,4 @@
-from db_helpers.populate_database import populate_database
+from helpers.populate_database import populate_database
 from config import config
 
 # Create databases and tables for each database in the config file
