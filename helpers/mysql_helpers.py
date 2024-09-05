@@ -27,7 +27,7 @@ def create_database(cursor: mysql.connector.cursor.MySQLCursor, database_name: s
         cursor.execute(f"ALTER DATABASE {database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"), # very important!
         cursor.execute(f"USE {database_name};")
         
-        print(f"Successfully created database {database_name}")
+        print(f"Successfully created database {database_name}\n")
     except Exception as error:
         print(f"An error occurred while creating database '{database_name}'.\nError:\n{error}")
 
@@ -46,7 +46,7 @@ def create_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str
     try:
         connection.execute(create_table_statement.rstrip(",\n") + "\n);")
         
-        print(f"Successfully created table '{table_name}'")
+        print(f"Successfully created table '{table_name}'\n")
     except Exception as error:
         print(f"An error occurred while trying to create table '{table_name}'\nError:\n{error}")
         
@@ -73,7 +73,7 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
             
             connection.execute(final_statement, chunk_values)
         
-        print(f"Successfully populated table '{table_name}'")
+        print(f"Successfully populated table '{table_name}'\n")
     except mysql.connector.Error as error:
         print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
 

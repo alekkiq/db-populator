@@ -1,6 +1,5 @@
 import pandas as pd
 import csv
-import os
 
 def get_csv_headers(csv_file: str) -> list:
     '''
