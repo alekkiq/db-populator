@@ -25,7 +25,7 @@ def populate_database(db_name: str, data_file: str, data_types: dict, table_name
     create_table(cursor, table_name, column_names, data_types)
     
     # continue to inserting the data itself.
-    data_chunksize = 500
+    data_chunksize = configs["connection_params"]["csv_chunksize"]
     data = get_csv_data(file_path, data_chunksize)
     insert_data_to_table(cursor, table_name, data, column_names)
     db.commit()

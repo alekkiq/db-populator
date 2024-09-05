@@ -12,7 +12,8 @@ def config() -> dict:
             "username": os.getenv("DB_USER"),
             "password": os.getenv("DB_PASSWORD"),
             "collation": "utf8mb4_unicode_ci",
-            "autocommit": False
+            "autocommit": False,
+            "csv_chuksize": 500 # Adjust as needed. Recommended 500 - 2500.
         },
         "databases": {
             # Your databases & tables go here!
