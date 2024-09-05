@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<people> <!-- <- Database name -->
+    <person> <!-- <- Table name -->
+        <id>1</id>
+        <firstname>John</firstname>
+        <lastname>Doe</lastname>
+        <email>john.doe@localhost</email>
+        <phone_number>1234567890</phone_number>
+        <description>My name is John Doe! I'm a software engineer.</description>
+    </person>
+    <person>
+        <id>2</id>
+        <firstname>Jane</firstname>
+        <lastname>Doe</lastname>
+        <email>jane.doe@localhost</email>
+        <phone_number>0987654321</phone_number>
+        <description></description>
+    </person>
+</people>

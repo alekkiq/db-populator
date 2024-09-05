@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "john.doe@localhost",
+        "phone_number": "1234567890",
+        "description": "My name is John Doe! I'm a software engineer."
+    },
+    {
+        "id": 2,
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "email": "jane.doe@localhost",
+        "phone_number": "0987654321",
+        "description": ""
+    }
+]
