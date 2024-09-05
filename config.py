@@ -15,13 +15,13 @@ def config() -> dict:
             "autocommit": False,
         },
         "chunksize": 500, # The number of rows inserted simultaneously in the DB
-        "data_format": "json", # "csv" | "json" | "xml"
+        "data_format": "xml", # "csv" | "json" | "xml"
         "databases": {
             # Your databases & tables go here!
             "countries": {
                 "tables": {
                     "country": {
-                        "data_file": "countries.json",
+                        "data_file": "countries.xml",
                         "data_types": {
                             "id": "INT PRIMARY KEY",
                             "code": "VARCHAR(2)",
