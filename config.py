@@ -13,8 +13,9 @@ def config() -> dict:
             "password": os.getenv("DB_PASSWORD"),
             "collation": "utf8mb4_unicode_ci",
             "autocommit": False,
-            "csv_chuksize": 500 # Adjust as needed. Recommended 500 - 2500.
         },
+        "chuksize": 500, # The number of rows inserted simultaneously in the DB
+        "data_format": "csv", # "csv" | "json" | "xml"
         "databases": {
             # Your databases & tables go here!
         }
