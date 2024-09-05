@@ -1,6 +1,5 @@
 import mysql.connector
 import pandas as pd
-import csv
 
 def db_connection(connection_params: dict = {...}):
     '''
@@ -12,7 +11,6 @@ def db_connection(connection_params: dict = {...}):
         password = connection_params["password"], # top tier, hiring applications accepted
         collation = connection_params["collation"], # fixes some weeeird issues with mysql connector
         autocommit = connection_params["autocommit"],
-        database = connection_params["database"] if isinstance(connection_params["database"], str) else None
     )
 
     return db
