@@ -1,0 +1,4 @@
+"id","firstname","lastname","email","phone_number"
+"1","John","Doe","john.doe@localhost","1234567890"
+"2","Jane","Doe","jane.doe@localhost","0987654321"
+...
