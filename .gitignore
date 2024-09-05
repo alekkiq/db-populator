@@ -1,6 +1,12 @@
 **.csv
+**.json
+**.xml
+
+.csv
+.json
+.xml
+
 **/__pycache__
 **/*.pyc
-.env
 
 !example.csv
