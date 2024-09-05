@@ -71,7 +71,4 @@ And the following external Python packages:
 ## TO-DOS
 - A shell script that would automatically fill the proper values to ```config.py``` based on user input.
 - Allow for other data types, like json.
-<<<<<<< HEAD
 - Add support for table relationships.
-=======
->>>>>>> b9f8b0bdd66b05eecd4d8b79604986c73d16589b
