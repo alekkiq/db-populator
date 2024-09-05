@@ -70,3 +70,4 @@ And the following external Python packages:
 
 ## TO-DOS
 - A shell script that would automatically fill the proper values to ```config.py``` based on user input.
+- Allow for other data types, like json.
