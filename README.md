@@ -35,10 +35,10 @@ And the following external Python packages:
 ## Getting started
 
 1. Copy the entire repository into your local instance.
-2. Run the setup script in your favorite command line interface from the root of the project with:
+2. Run the setup script in Git Bash or any similar command line interface (Windows CMD wont work by default!) from the root of the project with:
 
     ```bash
-    ./setup.sh
+    sh setup.sh
     ```
 3. Run this command to download the needed python packages:
 
