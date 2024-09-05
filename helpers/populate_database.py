@@ -8,7 +8,7 @@ from .xml_helpers import get_xml_data
 # Other helpers & config
 from .get_file_path import get_file_path
 from .mysql_helpers import *
-from config import config
+from config import config # Will work after setup.sh is ran.
 
 def populate_database(db_name: str, data_file: str, data_types: dict, table_name: str, file_type: str = "csv"):
     '''

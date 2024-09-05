@@ -1,5 +1,5 @@
 from helpers.populate_database import populate_database
-from config import config
+from config import config # Will work after setup.sh is ran.
 
 # Create databases and tables for each database in the config file
 if __name__ == "__main__":
