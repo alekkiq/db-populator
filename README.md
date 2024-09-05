@@ -5,6 +5,7 @@
 2. [Features](#features)
 3. [System requirements](#requirements)
 4. [Getting started](#getting-started)
+5. [TO-DOS](#todos)
 
 ## About
 A quite simple database populator built with Python. Works with **MariaDB** databases.
@@ -65,3 +66,7 @@ And the following external Python packages:
         ```
 
         **FYI**: the program runs through each database in ```"databases"``` and creates that database. It then loops through the ```"tables"``` and creates the tables under the database and finally populates that table with the data in ```"data_file"```
+5. Run the ```main.py``` file and the database(s) should be set to go!
+
+## TO-DOS
+- A shell script that would automatically fill the proper values to ```config.py``` based on user input.
