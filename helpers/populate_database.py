@@ -29,16 +29,18 @@ def populate_database(db_name: str, data_file: str, data_types: dict, table_name
         data_chunksize = configs["chunksize"]
         
         # to the correct actions based on the file type
-        match file_type:
-            case "csv":
-                data = get_csv_data(csv_file = file_path, chunksize = data_chunksize)
-            case "json":
-                data = get_json_data(json_file = file_path, chunksize = data_chunksize)
-            case "xml":
-                data = get_xml_data(xml_file = file_path, database_name = db_name, table_name = table_name, chunksize = data_chunksize)
-            case _:
-                print(f"File type '{file_type}' not supported (yet)")
-                return False
+        if file_path != "": # file was found
+            match file_type:
+                case "csv":
+                    data = get_csv_data(csv_file = file_path, chunksize = data_chunksize)
+                case "json":
+                    data = get_json_data(json_file = file_path, chunksize = data_chunksize)
+                case "xml":
+                    data = get_xml_data(xml_file = file_path, database_name = db_name, table_name = table_name, chunksize = data_chunksize)
+                case _:
+                    data = []
+        else:
+            data = []
         
         # Get the column names from the config file
         column_names = configs["databases"][db_name]["tables"][table_name]["data_types"].keys()

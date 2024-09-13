@@ -6,6 +6,9 @@ def get_file_path(filename: str) -> str:
     searching through all subdirectories and parent directories.
     '''
     
+    if filename == "" or not isinstance(filename, str):
+        return ""
+    
     directory = os.path.dirname(os.path.abspath(__file__))
     
     while directory:

@@ -55,6 +55,10 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
     '''
     print(f"Populating '{table_name}'...")
     
+    if not data or not len(data) <= 0:
+        print(f"No data to insert into table '{table_name}'\n Continuing...\n")
+        return
+    
     column_names_stringified = ",".join(column_names)
     placeholders = ",".join("%s" for _ in column_names)
     insert_data_statement = f"INSERT INTO {table_name} ({column_names_stringified}) VALUES \n"
