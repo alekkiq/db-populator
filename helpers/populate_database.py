@@ -47,8 +47,15 @@ def populate_database(db_name: str, data_file: str, data_types: dict, table_name
         
         # create the table with the correct column names / data types
         create_table(cursor, table_name, column_names, data_types)
+        table_relationships = configs["databases"][db_name]["tables"][table_name].get("relationships", None)
         
         insert_data_to_table(cursor, table_name, data, column_names)
+        
+        # set up the foreign key relationships
+        if table_relationships:
+            for relationship in table_relationships:
+                setup_table_relationship(cursor, table_name, relationship["foreign_key"], relationship["reference_table"], relationship["reference_column"], relationship.get("constraint_name", None))
+
         db.commit()
         
         # close the cursor & the database when ready

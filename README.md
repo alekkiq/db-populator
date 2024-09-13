@@ -72,6 +72,19 @@ And the following external Python packages:
                             "id": "INT PRIMARY KEY",
                             "name": "VARCHAR(255)",
                             ... # and so on.
+                        },
+                        # To declare table relationships, 
+                        # use the following structure:
+                        "relationships": {
+                            {
+                                "reference_table": "referenced_table_name",
+                                "reference_column": "referenced_column_name",
+                                "foreign_key": "foreign_key_in_table",
+                                "constraint_name": "your_constraint_name"
+                            },
+                            ...
+                            # You can set up multiple relationships
+                            # to a table in this manner.
                         }
                     }
                 }

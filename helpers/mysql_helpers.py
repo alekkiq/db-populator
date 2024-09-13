@@ -80,6 +80,22 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
     except mysql.connector.Error as error:
         print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
 
+def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, table_name: str, foreign_key: str, reference_table: str, reference_column: str, constraint_name: str = None):
+    '''
+    Sets up a foreign key relationship between the given table and the reference table
+    '''
+    print(f"Setting up foreign key relationship for table '{table_name}'...")
+    
+    if constraint_name is None:
+        constraint_name = f"fk_{table_name}_{foreign_key}_{reference_table}_{reference_column}"
+    
+    try:
+        connection.execute(f"ALTER TABLE {table_name} ADD CONSTRAINT {constraint_name} FOREIGN KEY ({foreign_key}) REFERENCES {reference_table}({reference_column});")
+        
+        print(f"Successfully set up foreign key relationship for table '{table_name}'\n")
+    except mysql.connector.Error as error:
+        print(f"An error occurred while trying to set up foreign key relationship for table '{table_name}'\nError:\n{format(error)}")
+
 def insert_data_from_csv(connection: mysql.connector.cursor.MySQLCursor, table_name: str, csv_file_path: str, chunk_size: int = 1000):
     '''
     Reads data from a CSV file and inserts it into the given database table in sized chunks.
