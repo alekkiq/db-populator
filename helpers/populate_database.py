@@ -1,6 +1,7 @@
 # The DB action file
 
 # Data type helpers:
+import mysql.connector.cursor
 from .csv_helpers import get_csv_headers, get_csv_data
 from .json_helpers import get_json_headers, get_json_data
 from .xml_helpers import get_xml_data
@@ -10,21 +11,13 @@ from .get_file_path import get_file_path
 from .mysql_helpers import *
 from config import config # Will work after setup.sh is ran.
 
-def populate_database(db_name: str, data_file: str, data_types: dict, table_name: str, file_type: str = "csv"):
+def populate_database(cursor: mysql.connector.cursor.MySQLCursor, db_name: str, data_file: str, data_types: dict, table_name: str, file_type: str = "csv"):
     '''
     Fills the given database name with data in the *data_file* CSV file.
     '''
     configs = config()
     
-    # get the database configuration from a config file
-    connection_params = configs["connection_params"]
-    
     try:
-        # initialize the connection and create the database
-        db = db_connection(connection_params)
-        cursor = db.cursor()
-        create_database(cursor, db_name)
-        
         file_path = get_file_path(data_file)
         data_chunksize = configs["chunksize"]
         
