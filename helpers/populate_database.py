@@ -49,12 +49,6 @@ def populate_database(cursor: mysql.connector.cursor.MySQLCursor, db_name: str, 
             for relationship in table_relationships:
                 setup_table_relationship(cursor, table_name, relationship["foreign_key"], relationship["reference_table"], relationship["reference_column"], relationship.get("constraint_name", None))
 
-        db.commit()
-        
-        # close the cursor & the database when ready
-        cursor.close()
-        db.close()
-
         print("Database setup successfully!")
         return True
     except Exception as error:
