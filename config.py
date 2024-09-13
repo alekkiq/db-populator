@@ -15,6 +15,16 @@ def config() -> dict:
             # used in our group project.
             "flight_game": {
                 "tables": {
+                    "country": {
+                        "data_file": "countries.csv",
+                        "data_types": {
+                            "iso_country": "VARCHAR(40) PRIMARY KEY NOT NULL",
+                            "name": "VARCHAR(40)",
+                            "continent": "VARCHAR(40)",
+                            "wikipedia_link": "VARCHAR(255)",
+                            "keywords": "VARCHAR(255)",
+                        }
+                    },
                     "airport": {
                         "data_file": "airports.csv",
                         "data_types": {
