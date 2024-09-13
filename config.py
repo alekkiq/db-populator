@@ -36,14 +36,14 @@ def config() -> dict:
                             "home_link": "VARCHAR(255)",
                             "wikipedia_link": "VARCHAR(255)",
                         },
-                        "relationships": {
+                        "relationships": [
                             {
                                 "foreign_key": "iso_country",
                                 "reference_table": "country",
                                 "reference_column": "iso_country",
                                 "constraint_name": "airport_ibfk_1",
                             }
-                        }
+                        ]
                     },
                     "country": {
                         "data_file": "countries.csv",
@@ -64,14 +64,14 @@ def config() -> dict:
                             "location": "VARCHAR(10)",
                             "screen_name": "VARCHAR(40)",
                         },
-                        "relationships": {
+                        "relationships": [
                             {
                                 "foreign_key": "location",
                                 "reference_table": "airport",
                                 "reference_column": "ident",
                                 "constraint_name": "game_ibfk_1",
                             }
-                        }
+                        ]
                     },
                     "goal": {
                         "data_file": "goal.csv",
@@ -92,7 +92,7 @@ def config() -> dict:
                             "game_id": "VARCHAR(40)",
                             "goal_id": "INT",
                         },
-                        "relationships": {
+                        "relationships": [
                             {
                                 "foreign_key": "game_id",
                                 "reference_table": "game",
@@ -105,7 +105,7 @@ def config() -> dict:
                                 "reference_column": "id",
                                 "constraint_name": "goal_reached_ibfk_2",
                             }
-                        }
+                        ]
                     }
                 }
             }
