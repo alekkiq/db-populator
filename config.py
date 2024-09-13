@@ -15,6 +15,16 @@ def config() -> dict:
             # used in our group project.
             "flight_game": {
                 "tables": {
+                    "country": {
+                        "data_file": "countries.csv",
+                        "data_types": {
+                            "iso_country": "VARCHAR(10) PRIMARY KEY NOT NULL",
+                            "name": "VARCHAR(255)",
+                            "continent": "VARCHAR(2)",
+                            "wikipedia_link": "VARCHAR(255)",
+                            "keywords": "VARCHAR(255)",
+                        }
+                    },
                     "airport": {
                         "data_file": "airports.csv",
                         "data_types": {
@@ -26,7 +36,7 @@ def config() -> dict:
                             "longitude_deg": "FLOAT",
                             "elevation_ft": "INT",
                             "continent": "VARCHAR(2)",
-                            "iso_country": "VARCHAR(2)",
+                            "iso_country": "VARCHAR(10)",
                             "iso_region": "VARCHAR(7)",
                             "municipality": "VARCHAR(255)",
                             "scheduled_service": "VARCHAR(3)",
@@ -35,6 +45,7 @@ def config() -> dict:
                             "local_code": "VARCHAR(7)",
                             "home_link": "VARCHAR(255)",
                             "wikipedia_link": "VARCHAR(255)",
+                            "keywords": "TEXT",
                         },
                         "relationships": [
                             {
@@ -44,16 +55,6 @@ def config() -> dict:
                                 "constraint_name": "airport_ibfk_1",
                             }
                         ]
-                    },
-                    "country": {
-                        "data_file": "countries.csv",
-                        "data_types": {
-                            "iso_country": "VARCHAR(40) PRIMARY KEY NOT NULL",
-                            "name": "VARCHAR(40)",
-                            "continent": "VARCHAR(40)",
-                            "wikipedia_link": "VARCHAR(255)",
-                            "keywords": "VARCHAR(255)",
-                        }
                     },
                     "game": {
                         "data_file": "game.csv",
