@@ -29,7 +29,7 @@ def config() -> dict:
                         "data_file": "airports.csv",
                         "data_types": {
                             "id": "INT PRIMARY KEY",
-                            "ident": "VARCHAR(15)",
+                            "ident": "VARCHAR(10)",
                             "type": "VARCHAR(50)",
                             "name": "VARCHAR(255)",
                             "latitude_deg": "FLOAT",
