@@ -18,6 +18,7 @@ def config() -> dict:
                     "country": {
                         "data_file": "countries.csv",
                         "data_types": {
+                            "id": "INT",
                             "iso_country": "VARCHAR(10) PRIMARY KEY NOT NULL",
                             "name": "VARCHAR(255)",
                             "continent": "VARCHAR(2)",
