@@ -18,9 +18,9 @@ def config() -> dict:
                     "country": {
                         "data_file": "countries.csv",
                         "data_types": {
-                            "iso_country": "VARCHAR(40) PRIMARY KEY NOT NULL",
-                            "name": "VARCHAR(40)",
-                            "continent": "VARCHAR(40)",
+                            "iso_country": "VARCHAR(10) PRIMARY KEY NOT NULL",
+                            "name": "VARCHAR(255)",
+                            "continent": "VARCHAR(2)",
                             "wikipedia_link": "VARCHAR(255)",
                             "keywords": "VARCHAR(255)",
                         }
@@ -29,7 +29,7 @@ def config() -> dict:
                         "data_file": "airports.csv",
                         "data_types": {
                             "id": "INT PRIMARY KEY",
-                            "ident": "VARCHAR(10)",
+                            "ident": "VARCHAR(15)",
                             "type": "VARCHAR(50)",
                             "name": "VARCHAR(255)",
                             "latitude_deg": "FLOAT",
