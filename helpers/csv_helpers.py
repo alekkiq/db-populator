@@ -13,7 +13,7 @@ def get_csv_data(csv_file: str, chunksize: int = 500) -> list:
     '''
     # First we need to handle any missing quotes in a csv file
     # because missing quotes will cause issues with sql insert
-    quote_string_values(csv_file)
+    # quote_string_values(csv_file) <- Fuck it, we expect you to have your csv in the right format.
     
     df = pd.read_csv(csv_file, delimiter=",", header=0, encoding="utf-8")
     parsed_data = df.fillna(0) # replaces nan values with 0
