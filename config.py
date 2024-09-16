@@ -9,6 +9,7 @@ def config() -> dict:
             "collation": "utf8mb4_unicode_ci",
         },
         "chunksize": 500,
+        "drop_existing_databases": True,
         "data_format": "csv", # "csv" | "json" | "xml"
         "databases": {
             # Setup for the `flight_game` database
