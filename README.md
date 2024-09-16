@@ -13,8 +13,6 @@ A quite simple database populator built with Python. Works with **MariaDB** data
 
 ***IMPORTANT***: This script is ***NOT*** suited for production use, as it is ***NOT*** designed to have a safe way of storing database credidentials! DO NOT USE IT IN PRODUCTION APP!
 
-This program was built solely for fun. I got the idea of building it during my first year engineering programming class, when we only got given a CSV file, and needed to paste the data into a database.
-
 ## Features
 - Supports bulk data insertion from the 3 common data file formats.
 - Capable of creating & populating multiple databases on one execution.
