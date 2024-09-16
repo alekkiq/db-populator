@@ -14,17 +14,19 @@ if __name__ == "__main__":
         for db_name, database in databases.items():
             db = db_connection(connection_params)
             cursor = db.cursor()
-            create_database(cursor, db_name, True)
+            create_database(cursor, db_name, configs.get("drop_existing_databases", False))
             
             for table_name, table in database["tables"].items():
+                print("*"*5, f"Setting up table '{table_name}' in '{db_name}'", "*"*15, "\n")
                 db_populated = populate_database(
-                    cursor = cursor,
+                    connection = db,
                     db_name = db_name, 
-                    data_file = table["data_file"], 
+                    data_file = table["data_file"] if "data_file" in table else "", 
                     file_type = configs["data_format"],
                     data_types = table["data_types"], 
                     table_name = table_name
                 )
+                print("*"*60, "\n")
                 db.commit()
             
             cursor.close()

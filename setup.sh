@@ -13,6 +13,7 @@ read -e -p "Database host [localhost]: " -i "localhost" DB_HOST
 read -e -p "Database port [3306]: " -i "3306" DB_PORT
 read -e -p "Database user (with write access) [root]: " -i "root" DB_USER
 read -e -p "Database password [password]: " -s DB_PASSWORD
+read -e -p "Drop matching databases on database creation? (True/False) [True]: " -i "True" DROP_EXISTING_DATABASES
 read -e -p "Allow automatic database commits? (True/False) [False]: " -i "False" AUTOCOMMIT
 
 # Data related questions
@@ -37,6 +38,7 @@ def config() -> dict:
         },
         "chunksize": $CHUNKSIZE,
         "data_format": "$DATA_FORMAT", # "csv" | "json" | "xml"
+        "drop_existing_databases": $DROP_EXISTING_DATABASES,
         "databases": {
             # Your databases & tables go here!
         }
