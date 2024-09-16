@@ -67,6 +67,7 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
     insert_data_statement = f"INSERT INTO {table_name} ({column_names_stringified}) VALUES \n"
     
     try:
+        connection.start_transaction()
         for chunk in data:
             chunk_values = []
             placeholders_list = []
@@ -79,9 +80,11 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
             final_statement = insert_data_statement + ",".join(placeholders_list)
             
             connection.execute(final_statement, chunk_values)
-        
+            connection.commit()
+
         print(f"Successfully populated table '{table_name}'\n")
     except mysql.connector.Error as error:
+        connection.rollback()
         print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
 
 def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, table_name: str, foreign_key: str, reference_table: str, reference_column: str, constraint_name: str = None):
