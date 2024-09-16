@@ -31,7 +31,7 @@ And the following external Python packages:
 - **mysql-connector-python**
 - **xmltodict** (for handling XML files)
 
-**Note**: These packages will be installed if you follow the Getting started guide.
+    **Note**: These packages will be installed if you follow the Getting started guide.
 
 ## Getting started
 

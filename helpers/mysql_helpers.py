@@ -30,8 +30,16 @@ def create_database(cursor: mysql.connector.cursor.MySQLCursor, database_name: s
         cursor.execute(f"USE {database_name};")
         
         print(f"Successfully created database {database_name}\n")
+        return {
+            "success": True,
+            "database": database_name,
+        }
     except Exception as error:
         print(f"An error occurred while creating database '{database_name}'.\nError:\n{error}")
+        return {
+            "success": False,
+            "error": error,
+        }
 
 def create_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str, column_names: list = [], column_data_types: dict = {}):
     '''
@@ -49,8 +57,16 @@ def create_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str
         connection.execute(create_table_statement.rstrip(",\n") + "\n);")
         
         print(f"Successfully created table '{table_name}'\n")
+        return {
+            "success": True,
+            "table": table_name,
+        }
     except Exception as error:
         print(f"An error occurred while trying to create table '{table_name}'\nError:\n{error}")
+        return {
+            "success": False,
+            "error": error,
+        }
         
 def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str, data: list, column_names: list):
     '''
@@ -83,9 +99,17 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
             connection.commit()
 
         print(f"Successfully populated table '{table_name}'\n")
+        return {
+            "success": True,
+            "table": table_name,
+        }
     except mysql.connector.Error as error:
         connection.rollback()
         print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
+        return {
+            "success": False,
+            "error": error,
+        }
 
 def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, table_name: str, foreign_key: str, reference_table: str, reference_column: str, constraint_name: str = None):
     '''
@@ -121,8 +145,16 @@ def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, tab
         connection.execute(f"ALTER TABLE {table_name} ADD CONSTRAINT {constraint_name} FOREIGN KEY ({foreign_key}) REFERENCES {reference_table}({reference_column});")
         
         print(f"Successfully set up foreign key relationship for table '{table_name}'\n")
+        return {
+            "success": True,
+            "table": table_name,
+        }
     except mysql.connector.Error as error:
         print(f"An error occurred while trying to set up foreign key relationship for table '{table_name}'\nError:\n{format(error)}")
+        return {
+            "success": False,
+            "error": error,
+        }
 
 def convert_data_type(item):
     '''

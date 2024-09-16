@@ -17,7 +17,7 @@ if __name__ == "__main__":
             create_database(cursor, db_name, True)
             
             for table_name, table in database["tables"].items():
-                populate_database(
+                db_populated = populate_database(
                     cursor = cursor,
                     db_name = db_name, 
                     data_file = table["data_file"], 
@@ -30,6 +30,6 @@ if __name__ == "__main__":
             cursor.close()
             db.close()
             
-            print(f"'{db_name}' setup successfully!")
+            print(f"'{db_name}' setup completed with {db_populated['error_count']} errors.\n")
     except Exception as error:
         print(f"An error occurred while trying to populate the database. Error:\n{error}")
