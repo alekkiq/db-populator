@@ -61,14 +61,14 @@ def create_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str
             "success": True,
             "table": table_name,
         }
-    except Exception as error:
+    except mysql.connector.Error as error:
         print(f"An error occurred while trying to create table '{table_name}'\nError:\n{error}")
         return {
             "success": False,
             "error": error,
         }
         
-def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_name: str, data: list, column_names: list):
+def insert_data_to_table(connection: mysql.connector.connection.MySQLConnection, table_name: str, data: list, column_names: list):
     '''
     Inserts data into the given database table in sized chunks. The function expects, that the connection is already connected to a database
     '''
@@ -78,6 +78,8 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
         print(f"No data to insert into table '{table_name}'\n Continuing...\n")
         return
     
+    cursor = connection.cursor()
+
     column_names_stringified = ",".join(column_names)
     placeholders = ",".join("%s" for _ in column_names)
     insert_data_statement = f"INSERT INTO {table_name} ({column_names_stringified}) VALUES \n"
@@ -95,21 +97,25 @@ def insert_data_to_table(connection: mysql.connector.cursor.MySQLCursor, table_n
                 
             final_statement = insert_data_statement + ",".join(placeholders_list)
             
-            connection.execute(final_statement, chunk_values)
+            cursor.execute(final_statement, chunk_values)
             connection.commit()
 
-        print(f"Successfully populated table '{table_name}'\n")
-        return {
+        result = {
             "success": True,
             "table": table_name,
         }
+
+        print(f"Successfully populated table '{table_name}'\n")
     except mysql.connector.Error as error:
         connection.rollback()
-        print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
-        return {
+        result = {
             "success": False,
             "error": error,
         }
+        print(f"An error occurred while trying to populate table '{table_name}'\nError:\n{format(error)}")
+    finally:
+        cursor.close()
+        return result
 
 def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, table_name: str, foreign_key: str, reference_table: str, reference_column: str, constraint_name: str = None):
     '''
@@ -144,7 +150,7 @@ def setup_table_relationship(connection: mysql.connector.cursor.MySQLCursor, tab
         # Add the foreign key constraint
         connection.execute(f"ALTER TABLE {table_name} ADD CONSTRAINT {constraint_name} FOREIGN KEY ({foreign_key}) REFERENCES {reference_table}({reference_column});")
         
-        print(f"Successfully set up foreign key relationship for table '{table_name}'\n")
+        print(f"Successfully set up foreign key relationship for table '{table_name}' on '{foreign_key}'\n")
         return {
             "success": True,
             "table": table_name,
