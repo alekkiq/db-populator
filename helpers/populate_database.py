@@ -11,13 +11,17 @@ from .get_file_path import get_file_path
 from .mysql_helpers import *
 from config import config # Will work after setup.sh is ran.
 
-def populate_database(cursor: mysql.connector.cursor.MySQLCursor, db_name: str, data_file: str, data_types: dict, table_name: str, file_type: str = "csv"):
+def populate_database(connection: mysql.connector.connection.MySQLConnection, db_name: str, data_file: str, data_types: dict, table_name: str, file_type: str = "csv"):
     '''
     Fills the given database name with data in the *data_file* CSV file.
     '''
     configs = config()
 
+    success = False
+
     try:
+        cursor = connection.cursor()
+
         file_path = get_file_path(data_file)
         data_chunksize = configs["chunksize"]
         
@@ -42,41 +46,32 @@ def populate_database(cursor: mysql.connector.cursor.MySQLCursor, db_name: str, 
         table_created = create_table(cursor, table_name, column_names, data_types)
         table_relationships = configs["databases"][db_name]["tables"][table_name].get("relationships", None)
         
-        data_inserted = insert_data_to_table(cursor, table_name, data, column_names)
+        data_inserted = insert_data_to_table(connection, table_name, data, column_names)
         
         # set up the foreign key relationships
+        relationships_setup = {}
+
         if table_relationships:
             for relationship in table_relationships:
                 relationships_setup = setup_table_relationship(cursor, table_name, relationship["foreign_key"], relationship["reference_table"], relationship["reference_column"], relationship.get("constraint_name", None))
+
+        success = True
+    except Exception as error:
+        success = False
+        print(f"An error occurred while trying to populate the database.\nError:\n{error}")
+    finally:
+        cursor.close()
 
         # check for errors in each action
         errors = check_errors({
             "table_created": table_created,
             "data_inserted": data_inserted,
             "relationships_setup": relationships_setup,
-        })["error_count"]
+        })
 
         return {
-            "table_created": table_created,
-            "data_inserted": data_inserted,
-            "relationships_setup": relationships_setup,
+            "success": success,
             "error_count": errors,
-        }
-    except Exception as error:
-        print(f"An error occurred while trying to populate the database.\nError:\n{error}")
-        return {
-            "table_created": {
-                "success": False,
-                "error": error,
-            },
-            "data_inserted": {
-                "success": False,
-                "error": error,
-            },
-            "relationships_setup": {
-                "success": False,
-                "error": error,
-            },
         }
     
 def check_errors(results: dict):
@@ -85,9 +80,7 @@ def check_errors(results: dict):
     '''
     errors = 0
     for result in results.values():
+        if result is None or result == {}: continue
         if not result["success"]:
             errors += 1
-    return {
-        "error_count": errors,
-        "success": errors == 0,
-    }
+    return errors
